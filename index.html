@@ -3,9 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Quiz Platform</title>
+    <link rel="stylesheet" href="teacherstudent.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <h1>priyanshu</h1>
+    <div class="container">
+        <div id="welcome-screen" class="screen">
+            <h1>Quiz Platform</h1>
+            <div class="button-group">
+                <button onclick="showTeacherPanel()">Teacher</button>
+                <button onclick="showStudentPanel()">Student</button>
+            </div>
+        </div>
+
+        <div id="teacher-panel" class="screen hidden">
+            <h2>Create Quiz</h2>
+            <form id="quiz-form">
+                <div ><label><b> Description</b></label><br>
+                    <input type="text" id="text" name="text"><br><br>
+                </div>
+                <div id="questions-container"></div>
+                <button type="button" onclick="addQuestion()" class="secondary-button">Add Another Question</button>
+                <div class="form-group">
+                    <label>Time Limit (minutes):</label>
+                    <input type="number" id="time-limit" min="1" required>
+                </div>
+                <button type="submit">Create Quiz</button>
+            </form>
+                      
+            <div id="share-link" class="hidden">
+                <h3>Share with students:</h3>
+                <div class="share-info">
+                    <div class="share-item">
+                        <h4>Quiz Link:</h4>
+                        <p id="quiz-link"></p>
+                    </div>
+                    <div class="share-item">
+                        <h4>Quiz Code:</h4>
+                        <p id="quiz-code-display"></p>
+                    </div>
+                </div>
+            </div>
+            <button onclick="showWelcomeScreen()">Back</button>
+        </div>
+
+        <div id="student-panel" class="screen hidden">
+            <h2>Take Quiz</h2>
+            <div id="quiz-entry">
+                <input type="text" id="student-name" placeholder="Enter your name" required>
+                <input type="text" id="quiz-code" placeholder="Enter quiz code" required>
+                <button onclick="startQuiz()">Start Quiz</button>
+            </div>
+            <div id="quiz-area" class="hidden">
+                <div class="quiz-header">
+                    <div id="timer"></div>
+                    <div id="progress">Question <span id="current-question">1</span> of <span id="total-questions">0</span></div>
+                </div>
+                <div id="question-display"></div>
+                <div id="options-display"></div>
+                <div class="navigation-buttons">
+                    <button onclick="previousQuestion()" id="prev-button" class="secondary-button">Previous</button>
+                    <button onclick="nextQuestion()" id="next-button">Next</button>
+                    <button onclick="submitQuiz()" id="submit-button" class="hidden">Submit Quiz</button>
+                </div>
+            </div>
+            <button onclick="showWelcomeScreen()">Back</button>
+        </div>
+
+        <div id="leaderboard" class="screen hidden">
+            <h2>Leaderboard</h2>
+            <table id="rankings">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Name</th>
+                        <th>Score</th>
+                        <th>Time</th>
+                        <th>Badges</th>
+                    </tr>
+                </thead>
+                <tbody id="rankings-body"></tbody>
+            </table>
+            <button onclick="showWelcomeScreen()">Back to Home</button>
+        </div>
+    </div>
 </body>
+<script src="teacherstudent.js"></script>
 </html>
